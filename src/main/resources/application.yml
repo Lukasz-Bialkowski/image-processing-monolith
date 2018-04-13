@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: uni-master-monolith-som
+
+server:
+  port: 8080
