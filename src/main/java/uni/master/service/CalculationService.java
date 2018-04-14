@@ -1,6 +1,8 @@
-package uni.master;
+package uni.master.service;
 
 import org.springframework.stereotype.Service;
+import uni.master.entity.ColorRGB;
+import uni.master.entity.ColorXY;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,8 +10,6 @@ import java.io.File;
 
 @Service
 public class CalculationService {
-
-    private static final int LOOPS = 15;
 
     private double countDistance(ColorXY color1, ColorXY color2) {
         return Math.sqrt(
@@ -63,12 +63,12 @@ public class CalculationService {
         return bestPixel;
     }
 
-    public void calculate() throws Exception {
+    public void calculate(String imageId, int loops) throws Exception {
 
         /**
          * Initialization
          * */
-        BufferedImage sourceImage = ImageIO.read(new File("inputImage.jpg"));
+        BufferedImage sourceImage = ImageIO.read(new File(imageId));
         int w = sourceImage.getWidth();
         int h = sourceImage.getHeight();
         BufferedImage trainingImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -94,7 +94,7 @@ public class CalculationService {
         /**
          * Training map calculation
          * */
-        for (int z = 0; z < LOOPS; z++) {
+        for (int z = 0; z < loops; z++) {
             System.out.println("Loop #" + z);
             for (int i = 0; i < w; i++) {
                 for (int j = 0; j < h; j++) {
@@ -120,7 +120,7 @@ public class CalculationService {
         /**
          * Save output to files
          * */
-        ImageIO.write(trainingImage, "jpg", new File("output.jpg"));
-        ImageIO.write(finalImage, "jpg", new File("newImage.jpg"));
+        ImageIO.write(trainingImage, "jpg", new File("palette.jpg"));
+        ImageIO.write(finalImage, "jpg", new File("final.jpg"));
     }
 }
