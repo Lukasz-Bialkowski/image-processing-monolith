@@ -8,6 +8,9 @@ import uni.master.entity.ColorXY;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class CalculationService {
@@ -122,7 +125,15 @@ public class CalculationService {
         /**
          * Save output to files
          * */
-        ImageIO.write(trainingImage, "jpg", new File("palette.jpg"));
-        ImageIO.write(finalImage, "jpg", new File("final.jpg"));
+        Path path = Paths.get(System.getProperty("user.home"));
+        if(!Files.exists(Paths.get(path.toString(), "images")))
+            Files.createDirectory(Paths.get(path.toString(), "images"));
+
+        ImageIO.write(trainingImage, "jpg",
+                new File(Paths.get(path.toString(), "images") + File.separator + "palette.jpg"));
+        ImageIO.write(finalImage, "jpg",
+                new File(Paths.get(path.toString(), "images") + File.separator + "final.jpg"));
+        ImageIO.write(trainingImage, "jpg", new File("src/main/resources/static/assets/images/palette.jpg"));
+        ImageIO.write(finalImage, "jpg", new File("src/main/resources/static/assets/images/final.jpg"));
     }
 }
