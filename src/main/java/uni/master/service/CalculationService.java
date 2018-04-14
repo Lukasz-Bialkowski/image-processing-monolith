@@ -122,7 +122,7 @@ public class CalculationService {
         /**
          * Save output to files
          * */
-        ImageIO.write(trainingImage, "jpg", new File("palette.jpg"));
-        ImageIO.write(finalImage, "jpg", new File("final.jpg"));
+        ImageIO.write(trainingImage, "jpg", new File("src/main/resources/static/assets/palette.jpg"));
+        ImageIO.write(finalImage, "jpg", new File("src/main/resources/static/assets/final.jpg"));
     }
 }

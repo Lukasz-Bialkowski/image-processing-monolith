@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.web.bind.annotation.*;
-import uni.master.ScheduledTask;
+import uni.master.executor.ScheduledTask;
 import uni.master.service.CalculationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class AppController {
 
     @RequestMapping(method = RequestMethod.GET)
     public void processImage(
-            @RequestParam(required = false, defaultValue = "100.jpg") String imageId,
+            @RequestParam(required = false, defaultValue = "static/assets/100.jpg") String imageId,
             @RequestParam(required = false, defaultValue = "1") int loops,
             @RequestParam(required = false, defaultValue = "1") int nodes) throws Exception {
         logger.info("Calculate operation started: " + imageId + ", loops: " + loops + ", nodes: " + nodes);
@@ -47,7 +47,7 @@ public class AppController {
 
     @RequestMapping(value = "/getImage/{imageId}")
     public byte[] getImage(@PathVariable String imageId, HttpServletRequest request) throws IOException, URISyntaxException {
-        URL rpath = getClass().getClassLoader().getResource("100.jpg");
+        URL rpath = getClass().getClassLoader().getResource("static/assets/100.jpg");
         Path path = new File(rpath.toURI()).toPath();
         return new byte[]{1};
     }
