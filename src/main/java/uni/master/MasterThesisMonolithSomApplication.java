@@ -21,6 +21,7 @@ public class MasterThesisMonolithSomApplication {
 
 	public static void main(String[] args) {
 		logger.info("Application started");
+		logger.info("$PWD output: " + MasterThesisMonolithSomApplication.class.getClassLoader().getResource(""));
 		SpringApplication.run(MasterThesisMonolithSomApplication.class, args);
 	}
 }

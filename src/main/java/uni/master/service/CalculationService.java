@@ -1,5 +1,6 @@
 package uni.master.service;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import uni.master.entity.ColorRGB;
 import uni.master.entity.ColorXY;
@@ -64,11 +65,12 @@ public class CalculationService {
     }
 
     public void calculate(String imageId, int loops) throws Exception {
-
+        File file = new ClassPathResource(imageId).getFile();
         /**
          * Initialization
          * */
-        BufferedImage sourceImage = ImageIO.read(new File(imageId));
+//        BufferedImage sourceImage = ImageIO.read(new File(imageId));
+        BufferedImage sourceImage = ImageIO.read(file);
         int w = sourceImage.getWidth();
         int h = sourceImage.getHeight();
         BufferedImage trainingImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);

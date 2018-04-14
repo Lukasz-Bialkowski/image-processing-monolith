@@ -4,12 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uni.master.ScheduledTask;
 import uni.master.service.CalculationService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/process")
@@ -18,14 +22,14 @@ public class AppController {
     private static final Logger logger = LoggerFactory.getLogger(AppController.class);
     private CalculationService calculationService;
     private TaskScheduler taskScheduler;
-
     private ScheduledTask scheduledTask;
 
     @Autowired
     public AppController(
             CalculationService calculationService,
             TaskScheduler taskScheduler,
-            ScheduledTask scheduledTask) {
+            ScheduledTask scheduledTask) throws IOException {
+
         this.calculationService = calculationService;
         this.taskScheduler = taskScheduler;
         this.scheduledTask = scheduledTask;
@@ -41,12 +45,13 @@ public class AppController {
         calculationService.calculate(imageId, loops);
     }
 
-//    @Scheduled(fixedRate = 1000)
-//    public void sendPcResource() {
-//        logger.info("Saving host resource benchmark snapshot: " + System.currentTimeMillis() / 1000);
-//        ResourceBenchmark resourceBenchmark = benchmarkService.makeResourceBenchmark();
-//        resourceBenchmarkRepository.save(resourceBenchmark);
-//    }
+    @RequestMapping(value = "/getImage/{imageId}")
+    public byte[] getImage(@PathVariable String imageId, HttpServletRequest request) throws IOException, URISyntaxException {
+        URL rpath = getClass().getClassLoader().getResource("100.jpg");
+        Path path = new File(rpath.toURI()).toPath();
+        return new byte[]{1};
+    }
+
 }
 
 
