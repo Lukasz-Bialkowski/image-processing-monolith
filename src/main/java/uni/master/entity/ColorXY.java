@@ -1,7 +1,7 @@
-package uni.master;
+package uni.master.entity;
 
 public class ColorXY {
-    final int x,y;
+    public final int x, y;
 
     public ColorXY(final int x, final int y) {
         this.x = x;

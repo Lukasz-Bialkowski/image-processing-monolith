@@ -1,7 +1,7 @@
-package uni.master;
+package uni.master.entity;
 
 public class ColorRGB {
-    final int r, g, b;
+    public final int r, g, b;
 
     public ColorRGB(int color) {
         this.r = (color & 0x00ff0000) >> 16;

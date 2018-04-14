@@ -1,24 +1,21 @@
-package uni.master;
+package uni.master.service;
 
 import com.sun.management.OperatingSystemMXBean;
 import org.springframework.stereotype.Service;
+import uni.master.entity.ResourceBenchmark;
 
 import java.lang.management.ManagementFactory;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Service
-class ResourceService {
+public class ResourceBenchmarkService {
     private OperatingSystemMXBean systemResources;
 
-    public ResourceService(){
+    public ResourceBenchmarkService(){
         this.systemResources = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
     }
 
-    public HostResources makeHostResources() {
-        return new HostResources(
+    public ResourceBenchmark makeResourceBenchmark() {
+        return new ResourceBenchmark(
                 systemResources.getTotalSwapSpaceSize(),
                 systemResources.getTotalPhysicalMemorySize(),
                 systemResources.getFreePhysicalMemorySize(),
