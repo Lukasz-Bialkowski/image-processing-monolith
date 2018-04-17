@@ -8,6 +8,7 @@ import java.lang.management.ManagementFactory;
 
 @Service
 public class ResourceBenchmarkService {
+
     private OperatingSystemMXBean systemResources;
 
     public ResourceBenchmarkService(){

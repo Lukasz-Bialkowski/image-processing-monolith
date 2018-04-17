@@ -1,0 +1,25 @@
+<div class="container">
+    <!--<h1 class="my-4">Task results <small>{{params.imageId}}</small></h1>-->
+    <br />
+    <h2>Execution details <small>{{params.imageId}}</small></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <h4 ng-if="params.id">Task id: <small>{{params.id}}</small></h4>
+            <h4>Host Ip: <small>{{params.ipAddress}}</small></h4>
+            <h4>Host Name: <small>{{params.host}}</small></h4>
+            <h4>Nodes: <small>{{params.nodes}}</small></h4>
+            <h4>Iterations: <small>{{params.iterations}}</small></h4>
+            <h4>Start time: <small>{{params.startTime | date:'HH:mm:ss a'}}</small></h4>
+            <h4>End time: <small>{{params.endTime | date:'HH:mm:ss a'}}</small></h4>
+            <h4>Total time: <small>{{params.totalTime/1000}} [sec]</small></h4>
+            <h4>Image name: <small>{{params.imageId}}</small></h4>
+        </div>
+        <div class="col-md-4">
+            <img class="card-img-top" src="assets/f{{params.imageId}}" alt="">
+        </div>
+        <div class="col-md-4">
+            <img class="card-img-top" src="assets/p{{params.imageId}}" alt="">
+        </div>
+    </div>
+</div>

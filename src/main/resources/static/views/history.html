@@ -1,0 +1,47 @@
+<div class="container" ng-init="getHistory()">
+    <h1 class="my-4">Process Tasks History</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..."
+                       ng-model="search" id="search">
+                <span class="input-group-btn">
+                    <button class="float-right btn btn-danger" type="button" ng-click="getHistory()">Refresh</button>
+                    <button class="float-right btn btn-success" type="button" ng-click="searchList()">Search</button>
+                </span>
+            </div>
+            <small id="searchHelp" class="form-text text-muted">
+                Will be searched by id, imageName, host or IPv4.</small>
+        </div>
+    </div>
+
+    <hr />
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task Id</th>
+            <th scope="col">Image Id</th>
+            <th scope="col">IPv4 Address</th>
+            <th scope="col">Host</th>
+            <th scope="col">Nodes</th>
+            <th scope="col">Iterations</th>
+            <th scope="col">StartTime</th>
+            <th scope="col">Total Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="processTask in history">
+            <th scope="row">{{$index + 1}}.</th>
+            <td>{{processTask.id}}</td>
+            <td>{{processTask.imageId}}</td>
+            <td>{{processTask.ipAddress}}</td>
+            <td>{{processTask.host}}</td>
+            <td>{{processTask.nodes}}</td>
+            <td>{{processTask.iterations}}</td>
+            <td>{{processTask.startTime | date:'HH:mm:ss a'}}</td>
+            <td>{{processTask.totalTime/1000}} [sec]</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

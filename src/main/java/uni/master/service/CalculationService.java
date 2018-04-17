@@ -68,12 +68,10 @@ public class CalculationService {
     }
 
     public void calculate(String imageId, int loops) throws Exception {
-        File file = new ClassPathResource(imageId).getFile();
         /**
          * Initialization
          * */
-//        BufferedImage sourceImage = ImageIO.read(new File(imageId));
-        BufferedImage sourceImage = ImageIO.read(file);
+        BufferedImage sourceImage = ImageIO.read(new ClassPathResource("static/assets/"+ imageId).getFile());
         int w = sourceImage.getWidth();
         int h = sourceImage.getHeight();
         BufferedImage trainingImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -125,15 +123,15 @@ public class CalculationService {
         /**
          * Save output to files
          * */
-        Path path = Paths.get(System.getProperty("user.home"));
-        if(!Files.exists(Paths.get(path.toString(), "images")))
-            Files.createDirectory(Paths.get(path.toString(), "images"));
-
-        ImageIO.write(trainingImage, "jpg",
-                new File(Paths.get(path.toString(), "images") + File.separator + "palette.jpg"));
-        ImageIO.write(finalImage, "jpg",
-                new File(Paths.get(path.toString(), "images") + File.separator + "final.jpg"));
-        ImageIO.write(trainingImage, "jpg", new File("src/main/resources/static/assets/images/palette.jpg"));
-        ImageIO.write(finalImage, "jpg", new File("src/main/resources/static/assets/images/final.jpg"));
+//        Path path = Paths.get(System.getProperty("user.home"));
+//        if(!Files.exists(Paths.get(path.toString(), "images")))
+//            Files.createDirectory(Paths.get(path.toString(), "images"));
+//
+//        ImageIO.write(trainingImage, "jpg",
+//                new File(Paths.get(path.toString(), "images") + File.separator + "p" + imageId));
+//        ImageIO.write(finalImage, "jpg",
+//                new File(Paths.get(path.toString(), "images") + File.separator + "f" + imageId));
+        ImageIO.write(trainingImage, "jpg", new File("src/main/resources/static/assets/p" + imageId));
+        ImageIO.write(finalImage, "jpg", new File("src/main/resources/static/assets/f" + imageId));
     }
 }

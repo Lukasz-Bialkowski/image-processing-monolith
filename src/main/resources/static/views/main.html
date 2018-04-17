@@ -2,50 +2,65 @@
 <div class="container">
 
     <!-- Page Heading -->
-    <h1 class="my-4">Page Heading<button class="btn btn-danger" ng-click="getFoo()">getFoo</button>
-        <small>Secondary Text</small>
+    <h1 class="my-4">Self Organizing Maps
+        <small>Environment constants</small>
     </h1>
+    <form name="basic">
+        <fieldset>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="iterations"><b>Iterations:</b></label>
+                        <input class="form-control" id="iterations" ng-model="iterations" type="number"/>
+                        <small id="iterationsHelp" class="form-text text-muted">
+                            Enter algorithm iterations.</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nodes"><b>Nodes:</b></label>
+                        <input class="form-control" id="nodes" ng-model="nodes" type="number"
+                               placeholder="On Monolith defaults to 1" disabled/>
+                        <small id="nodesHelp" class="form-text text-muted">
+                            On Monolith defaults to 1.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="#" ng-click="processImage('100.jpg')"><img class="card-img-top" src="assets/100.jpg" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#" ng-click="processImage('100.jpg')">Image 100px</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="#" ng-click="processImage('200.jpg')"><img class="card-img-top" src="assets/200.jpg" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#" ng-click="processImage('200.jpg')">Image 200px</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="#" ng-click="processImage('300.jpg')"><img class="card-img-top" src="assets/300.jpg" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#" ng-click="processImage('300.jpg')">Image 449px</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
 
-    <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project One</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                        aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-                        dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Two</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-                        odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Project Three</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error
-                        quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure
-                        perspiciatis mollitia recusandae vero vel quam!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
+        </fieldset>
+    </form>
 </div>
 <!-- /.container -->

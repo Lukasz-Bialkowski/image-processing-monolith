@@ -7,4 +7,12 @@ public class ColorXY {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "ColorXY{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
