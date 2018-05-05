@@ -3,12 +3,16 @@ package uni.master.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import uni.master.entity.ProcessTask;
+import uni.master.entity.ResourceBenchmark;
 import uni.master.executor.ScheduledTask;
 import uni.master.repository.ProcessTaskRepository;
+import uni.master.repository.ResourceBenchmarkRepository;
 import uni.master.service.CalculationService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +22,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -31,17 +34,20 @@ public class AppController {
     private TaskScheduler taskScheduler;
     private ScheduledTask scheduledTask;
     private ProcessTaskRepository processTaskRepository;
+    private ResourceBenchmarkRepository resourceBenchmarkRepository;
 
     @Autowired
     public AppController(
             CalculationService calculationService,
             TaskScheduler taskScheduler,
             ScheduledTask scheduledTask,
-            ProcessTaskRepository processTaskRepository) throws IOException {
+            ProcessTaskRepository processTaskRepository,
+            ResourceBenchmarkRepository resourceBenchmarkRepository) throws IOException {
         this.calculationService = calculationService;
         this.taskScheduler = taskScheduler;
         this.scheduledTask = scheduledTask;
         this.processTaskRepository = processTaskRepository;
+        this.resourceBenchmarkRepository = resourceBenchmarkRepository;
     }
 
     @RequestMapping(value = "/process", method = RequestMethod.GET)
@@ -51,7 +57,7 @@ public class AppController {
             @RequestParam(required = false, defaultValue = "1") int nodes) throws Exception {
 
         logger.info("Calculate operation started: " + imageId + ", loops: " + iterations + ", nodes: " + nodes);
-//        taskScheduler.scheduleAtFixedRate(scheduledTask, 1000);
+        taskScheduler.scheduleAtFixedRate(scheduledTask, 1000);
         long startTimeNano = System.nanoTime();
         long startTime = System.currentTimeMillis();
         calculationService.calculate(imageId, iterations);
@@ -66,6 +72,13 @@ public class AppController {
     public List<ProcessTask> getHistory() {
         logger.info("History endpoint called");
         return processTaskRepository.findAll();
+    }
+
+    @RequestMapping(value = "/benchmark", method = RequestMethod.GET)
+    public List<ResourceBenchmark> getHistoryBenchmark(@RequestParam int size) {
+        logger.info("History endpoint called");
+        Pageable page = PageRequest.of(0, size);
+        return resourceBenchmarkRepository.findAll(page).getContent();
     }
 
     @RequestMapping(value = "/searchList", method = RequestMethod.GET)

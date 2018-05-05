@@ -1,4 +1,56 @@
-<div class="container" ng-init="getHistory()">
+<!--<div class="container" ng-init="getHistory()">-->
+<div class="container">
+    <h1 class="my-4">Process Tasks History</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..."
+                       ng-model="pageSize" id="search2">
+                <span class="input-group-btn">
+                    <button class="float-right btn btn-danger" type="button" ng-click="getBenchmarkHistory()">Refresh</button>
+                </span>
+            </div>
+            <small id="searchHelp2" class="form-text text-muted">
+                Will be searched and limit response count.</small>
+        </div>
+    </div>
+
+    <hr />
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task Id</th>
+            <th scope="col">Host</th>
+            <th scope="col">IPv4 Address</th>
+            <th scope="col">Total Swap Space Size [MB]</th>
+            <th scope="col">Total Physical Memory Size [MB]</th>
+            <th scope="col">Free Physical Memory Size [MB]</th>
+            <th scope="col">Free Swap Space Size [MB]</th>
+            <th scope="col">System Cpu Load</th>
+            <th scope="col">Process Cpu Load</th>
+            <th scope="col">System Load Average</th>
+            <th scope="col">Timestamp</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="benchmark in benchmarkHistory">
+            <th scope="row">{{$index + 1}}.</th>
+            <td>{{benchmark.id}}</td>
+            <td>{{benchmark.host}}</td>
+            <td>{{benchmark.ipAddress}}</td>
+            <td>{{benchmark.totalSwapSpaceSize}}</td>
+            <td>{{benchmark.totalPhysicalMemorySize}}</td>
+            <td>{{benchmark.freePhysicalMemorySize}}</td>
+            <td>{{benchmark.freeSwapSpaceSize}}</td>
+            <td>{{benchmark.systemCpuLoad}}</td>
+            <td>{{benchmark.processCpuLoad}}</td>
+            <td>{{benchmark.systemLoadAverage}}</td>
+            <td>{{benchmark.timestamp | date:'HH:mm:ss a'}}</td>
+        </tr>
+        </tbody>
+    </table>
+
     <h1 class="my-4">Process Tasks History</h1>
     <div class="row">
         <div class="col-md-12">

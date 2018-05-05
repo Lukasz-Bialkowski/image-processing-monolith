@@ -37,6 +37,7 @@ app.controller('mainCtrl', function($scope, $resource, $state, $stateParams) {
     $scope.nodes = 1;
     $scope.params = $stateParams;
     $scope.search = "";
+    $scope.pageSize = 100;
 
     $scope.appResource = $resource("/app/:operation/:image", {}, {
         getImage: {method: 'GET'},
@@ -44,6 +45,7 @@ app.controller('mainCtrl', function($scope, $resource, $state, $stateParams) {
         pwd: {method: 'GET'},
         processImage: {method: 'GET'},
         getHistory: {method: 'GET', isArray: true},
+        getBenchmarkHistory: {method: 'GET', isArray: true},
         searchList: {method: 'GET', isArray: true}
     });
 
@@ -79,6 +81,11 @@ app.controller('mainCtrl', function($scope, $resource, $state, $stateParams) {
     $scope.getHistory = function(){
         $scope.appResource.getHistory({operation: 'history'}, function(response) {
             $scope.history = response; });
+    };
+
+    $scope.getBenchmarkHistory = function(){
+        $scope.appResource.getBenchmarkHistory({operation: 'benchmark', size: $scope.pageSize}, function(response) {
+            $scope.benchmarkHistory = response; });
     };
 
     $scope.searchList = function(){

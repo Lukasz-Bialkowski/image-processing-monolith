@@ -23,7 +23,8 @@ public class ResourceBenchmarkService {
                 System.currentTimeMillis(),
                 systemResources.getFreeSwapSpaceSize(),
                 systemResources.getSystemCpuLoad(),
-                systemResources.getProcessCpuLoad()
+                systemResources.getProcessCpuLoad(),
+                systemResources.getSystemLoadAverage()
         );
     }
 }
