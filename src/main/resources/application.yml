@@ -5,23 +5,23 @@ spring:
     rest:
       basePath: /api
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
         format_sql: true
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    platform: postgres
+    url: jdbc:postgresql://${postgres_url}:5432/postgres
+    username: postgres
+    password: postgres
+
+# Docker environment
+# docker run --name psql -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+# docker run --name pgadmin4 -p 8444:80 -e "PGADMIN_DEFAULT_EMAIL=postgres@domain.com" -e "PGADMIN_DEFAULT_PASSWORD=postgres" -d dpage/pgadmin4
+# postgres_url: 172.17.0.1
+postgres_url: localhost
 
 server:
   port: 8081
-
-#elasticsearch.clustername = mkyong-cluster
-#elasticsearch.host = localhost
-#elasticsearch.port = 9300
-
-#
-# Home directory of the embedded Elasticsearch instance. Default to the
-# current working directory.
-#
-#spring.data.elasticsearch.properties.path.home=target/elastic-embedded
-#spring.data.elasticsearch.properties.transport.tcp.connect_timeout=60s
