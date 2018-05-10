@@ -3,6 +3,7 @@ package uni.master.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,29 +21,32 @@ public class ResourceBenchmark {
 
     @Id @GeneratedValue
     @Getter Long id;
-    @Getter private String host;
-    @Getter private String ipAddress;
-    @Getter private long TotalSwapSpaceSize;
-    @Getter private long FreeSwapSpaceSize;
-    @Getter private long TotalPhysicalMemorySize;
-    @Getter private long FreePhysicalMemorySize;
-    @Getter private Date Timestamp;
-    @Getter private double SystemCpuLoad;
-    @Getter private double ProcessCpuLoad;
-    @Getter private double SystemLoadAverage;
+    @Getter @Setter private String host;
+    @Getter @Setter private String ipAddress;
+    @Getter @Setter private long TotalSwapSpaceSize;
+    @Getter @Setter private long FreeSwapSpaceSize;
+    @Getter @Setter private long TotalPhysicalMemorySize;
+    @Getter @Setter private long FreePhysicalMemorySize;
+    @Getter @Setter private long UsedPhysicalMemorySize;
+    @Getter @Setter private Date Timestamp;
+    @Getter @Setter private double SystemCpuLoad;
+    @Getter @Setter private double ProcessCpuLoad;
+    @Getter @Setter private double SystemLoadAverage;
+    private static final long MEGABYTE = 1024L * 1024L;
 
-    public ResourceBenchmark(long totalSwapSpaceSize, long totalPhysicalMemorySize, long freePhysicalMemorySize, long timestamp, long freeSwapSpaceSize, double systemCpuLoad, double processCpuLoad, double systemLoadAverage) {
+    public ResourceBenchmark(long totalSwapSpaceSize, long totalPhysicalMemorySize, long freePhysicalMemorySize, long usedPhysicalMemorySize, long timestamp, long freeSwapSpaceSize, double systemCpuLoad, double processCpuLoad, double systemLoadAverage) {
         try {
             ipAddress = ResourceBenchmark.getLocalHostLANAddress().getHostAddress();
             host = ResourceBenchmark.getLocalHostLANAddress().getHostName();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        TotalSwapSpaceSize = totalSwapSpaceSize / 1048576;
-        TotalPhysicalMemorySize = totalPhysicalMemorySize / 1048576;
-        FreePhysicalMemorySize = freePhysicalMemorySize / 1048576;
+        TotalSwapSpaceSize = ResourceBenchmark.bytesToMegabytes(totalSwapSpaceSize);
+        TotalPhysicalMemorySize = ResourceBenchmark.bytesToMegabytes(totalPhysicalMemorySize);
+        FreePhysicalMemorySize = ResourceBenchmark.bytesToMegabytes(freePhysicalMemorySize);
+        UsedPhysicalMemorySize = ResourceBenchmark.bytesToMegabytes(usedPhysicalMemorySize);
         Timestamp = new Date(timestamp);
-        FreeSwapSpaceSize = freeSwapSpaceSize / 1048576;
+        FreeSwapSpaceSize = ResourceBenchmark.bytesToMegabytes(freeSwapSpaceSize);
         SystemCpuLoad = ((double)((int)(systemCpuLoad * 10000)))/10000;
         ProcessCpuLoad = ((double)((int)(processCpuLoad * 10000)))/10000;
         SystemLoadAverage = systemLoadAverage;
@@ -63,6 +67,10 @@ public class ResourceBenchmark {
                 ", ProcessCpuLoad=" + ProcessCpuLoad +
                 ", SystemLoadAverage=" + SystemLoadAverage +
                 '}';
+    }
+
+    private static long bytesToMegabytes(long bytes) {
+        return bytes / MEGABYTE;
     }
 
     private static InetAddress getLocalHostLANAddress() throws UnknownHostException {

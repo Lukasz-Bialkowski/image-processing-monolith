@@ -10,6 +10,7 @@ import java.lang.management.ManagementFactory;
 public class ResourceBenchmarkService {
 
     private OperatingSystemMXBean systemResources;
+    private Runtime runtime = Runtime.getRuntime();
 
     public ResourceBenchmarkService(){
         this.systemResources = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
@@ -18,8 +19,9 @@ public class ResourceBenchmarkService {
     public ResourceBenchmark makeResourceBenchmark() {
         return new ResourceBenchmark(
                 systemResources.getTotalSwapSpaceSize(),
-                systemResources.getTotalPhysicalMemorySize(),
-                systemResources.getFreePhysicalMemorySize(),
+                runtime.totalMemory(),
+                runtime.freeMemory(),
+                runtime.totalMemory() - runtime.freeMemory(),
                 System.currentTimeMillis(),
                 systemResources.getFreeSwapSpaceSize(),
                 systemResources.getSystemCpuLoad(),
