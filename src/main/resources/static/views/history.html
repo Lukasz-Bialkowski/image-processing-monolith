@@ -24,9 +24,10 @@
             <th scope="col">Host</th>
             <th scope="col">IPv4 Address</th>
             <th scope="col">Total Swap Space Size [MB]</th>
+            <th scope="col">Free Swap Space Size [MB]</th>
             <th scope="col">Total Physical Memory Size [MB]</th>
             <th scope="col">Free Physical Memory Size [MB]</th>
-            <th scope="col">Free Swap Space Size [MB]</th>
+            <th scope="col">Used Physical Memory Size [MB]</th>
             <th scope="col">System Cpu Load</th>
             <th scope="col">Process Cpu Load</th>
             <th scope="col">System Load Average</th>
@@ -40,9 +41,10 @@
             <td>{{benchmark.host}}</td>
             <td>{{benchmark.ipAddress}}</td>
             <td>{{benchmark.totalSwapSpaceSize}}</td>
+            <td>{{benchmark.freeSwapSpaceSize}}</td>
             <td>{{benchmark.totalPhysicalMemorySize}}</td>
             <td>{{benchmark.freePhysicalMemorySize}}</td>
-            <td>{{benchmark.freeSwapSpaceSize}}</td>
+            <td>{{benchmark.usedPhysicalMemorySize}}</td>
             <td>{{benchmark.systemCpuLoad}}</td>
             <td>{{benchmark.processCpuLoad}}</td>
             <td>{{benchmark.systemLoadAverage}}</td>
