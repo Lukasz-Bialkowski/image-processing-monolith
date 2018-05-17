@@ -76,6 +76,7 @@ public class ResourceBenchmark {
     private static InetAddress getLocalHostLANAddress() throws UnknownHostException {
         try {
             InetAddress candidateAddress = null;
+            boolean isSecond = false;
             // Iterate all NICs (network interface cards)...
             for (Enumeration ifaces = NetworkInterface.getNetworkInterfaces(); ifaces.hasMoreElements();) {
                 NetworkInterface iface = (NetworkInterface) ifaces.nextElement();
@@ -86,7 +87,9 @@ public class ResourceBenchmark {
 
                         if (inetAddr.isSiteLocalAddress()) {
                             // Found non-loopback site-local address. Return it immediately...
-                            return inetAddr;
+                            if(isSecond)
+                                return inetAddr;
+                            isSecond = true;
                         }
                         else if (candidateAddress == null) {
                             // Found non-loopback address, but not necessarily site-local.
