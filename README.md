@@ -1,3 +1,4 @@
+#image-processing-monolith
 System that uses machine learning algorithms to test various aspects of performance - CPU usage, waiting time, memory consumption, cashe usage, idle time, heap space etc.
 I've build the same application in two versions. One according to the newest standards of building microservices and the other is a monolith.
 Through series of tests with various stress level I compared the two mentioned architectures.
